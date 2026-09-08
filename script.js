@@ -1,765 +1,502 @@
-(() => {
+/* =========================================================
+   WEDDING INVITATION
+   INTERACTION / ANIMATION / COUNTDOWN / LIGHTBOX
+   ========================================================= */
 
-  "use strict";
+document.addEventListener("DOMContentLoaded", () => {
 
-
-  /* =========================================================
+  /* =======================================================
      ELEMENTS
-  ========================================================= */
+     ======================================================= */
 
-  const entrance =
-    document.getElementById("entrance");
+  const body = document.body;
 
-  const website =
-    document.getElementById("website");
+  const opening = document.getElementById("opening");
+  const openingCard = document.getElementById("openingCard");
+  const openButton = document.getElementById("openButton");
 
-  const openButton =
-    document.getElementById("open-invitation");
+  const invitation = document.getElementById("invitation");
 
-  const musicButton =
-    document.getElementById("music-toggle");
+  const butterflyLayer =
+    document.getElementById("butterflyLayer");
 
-  const reducedMotion =
-    window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    );
+  const music =
+    document.getElementById("weddingMusic");
 
+  const lightbox =
+    document.getElementById("lightbox");
 
-  /* =========================================================
-     INITIAL STATE
-  ========================================================= */
+  const lightboxImage =
+    document.getElementById("lightboxImage");
 
-  entrance.hidden = false;
-
-  document.body.classList.add("sealed");
-
-  website.inert = true;
-
-  openButton.focus();
+  const lightboxClose =
+    document.getElementById("lightboxClose");
 
 
-  /* =========================================================
-     AUDIO
-  ========================================================= */
+  /* =======================================================
+     OPENING STATE
+     ======================================================= */
 
-  let audioContext;
-  let masterGain;
-  let melodyTimer;
-  let musicOn = false;
-  let opening = false;
+  let invitationOpened = false;
 
 
-  const AudioContextClass =
-    window.AudioContext ||
-    window.webkitAudioContext;
+  /* =======================================================
+     PREVENT PAGE FROM SHOWING SCROLL POSITION ON LOAD
+     ======================================================= */
+
+  window.scrollTo(0, 0);
 
 
-  const melody = [
-    523.25,
-    659.25,
-    783.99,
-    659.25,
-    587.33,
-    698.46,
-    880,
-    698.46,
-    493.88,
-    587.33,
-    783.99,
-    587.33,
-    523.25,
-    659.25,
-    783.99,
-    1046.5
-  ];
+  /* =======================================================
+     BUTTERFLY CREATION
+     ======================================================= */
 
+  function createOpeningButterflies() {
 
-  /* =========================================================
-     PLAY MELODY PHRASE
-  ========================================================= */
-
-  function playPhrase() {
-
-    if (
-      !audioContext ||
-      !musicOn
-    ) {
+    if (!butterflyLayer) {
       return;
     }
 
+    butterflyLayer.innerHTML = "";
 
-    const start =
-      audioContext.currentTime + 0.08;
+    const butterflyCount = 14;
 
-
-    melody.forEach(
-      (frequency, index) => {
-
-        const oscillator =
-          audioContext.createOscillator();
-
-        const envelope =
-          audioContext.createGain();
-
-        const time =
-          start + index * 0.65;
-
-
-        oscillator.type = "sine";
-
-        oscillator.frequency.value =
-          frequency;
-
-
-        envelope.gain.setValueAtTime(
-          0,
-          time
-        );
-
-
-        envelope.gain.linearRampToValueAtTime(
-          0.09,
-          time + 0.025
-        );
-
-
-        envelope.gain.exponentialRampToValueAtTime(
-          0.0001,
-          time + 2.4
-        );
-
-
-        oscillator.connect(
-          envelope
-        );
-
-        envelope.connect(
-          masterGain
-        );
-
-
-        oscillator.start(time);
-
-        oscillator.stop(
-          time + 2.5
-        );
-
-
-        oscillator.onended = () => {
-
-          oscillator.disconnect();
-
-          envelope.disconnect();
-
-        };
-
-      }
-    );
-
-  }
-
-
-  /* =========================================================
-     MUSIC BUTTON
-  ========================================================= */
-
-  function updateMusicButton() {
-
-    musicButton.textContent =
-      musicOn
-        ? "Music on"
-        : "Music off";
-
-
-    musicButton.setAttribute(
-      "aria-pressed",
-      String(musicOn)
-    );
-
-
-    musicButton.setAttribute(
-      "aria-label",
-      musicOn
-        ? "Turn music off"
-        : "Turn music on"
-    );
-
-  }
-
-
-  /* =========================================================
-     START MUSIC
-  ========================================================= */
-
-  async function startMusic() {
-
-    if (!AudioContextClass) {
-      return;
-    }
-
-
-    try {
-
-      if (!audioContext) {
-
-        audioContext =
-          new AudioContextClass();
-
-
-        masterGain =
-          audioContext.createGain();
-
-
-        masterGain.gain.value =
-          0;
-
-
-        masterGain.connect(
-          audioContext.destination
-        );
-
-      }
-
-
-      await audioContext.resume();
-
-
-      musicOn = true;
-
-
-      masterGain.gain.cancelScheduledValues(
-        audioContext.currentTime
-      );
-
-
-      masterGain.gain.setTargetAtTime(
-        0.5,
-        audioContext.currentTime,
-        0.2
-      );
-
-
-      clearInterval(
-        melodyTimer
-      );
-
-
-      playPhrase();
-
-
-      melodyTimer =
-        setInterval(
-          playPhrase,
-          melody.length * 650
-        );
-
-    }
-
-    catch {
-
-      musicOn = false;
-
-    }
-
-
-    updateMusicButton();
-
-  }
-
-
-  /* =========================================================
-     STOP MUSIC
-  ========================================================= */
-
-  function stopMusic() {
-
-    musicOn = false;
-
-    clearInterval(
-      melodyTimer
-    );
-
-
-    if (
-      audioContext &&
-      masterGain
-    ) {
-
-      masterGain.gain.cancelScheduledValues(
-        audioContext.currentTime
-      );
-
-
-      masterGain.gain.setTargetAtTime(
-        0,
-        audioContext.currentTime,
-        0.08
-      );
-
-    }
-
-
-    updateMusicButton();
-
-  }
-
-
-  /* =========================================================
-     CREATE FLYING BUTTERFLY
-  ========================================================= */
-
-  function createButterfly() {
-
-    const butterfly =
-      document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "svg"
-      );
-
-
-    butterfly.setAttribute(
-      "viewBox",
-      "0 0 120 120"
-    );
-
-
-    butterfly.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-
-    butterfly.classList.add(
-      "flying-butterfly"
-    );
-
-
-    const use =
-      document.createElementNS(
-        "http://www.w3.org/2000/svg",
-        "use"
-      );
-
-
-    use.setAttribute(
-      "href",
-      "#butterfly"
-    );
-
-
-    butterfly.appendChild(
-      use
-    );
-
-
-    return butterfly;
-
-  }
-
-
-  /* =========================================================
-     RELEASE BUTTERFLIES
-  ========================================================= */
-
-  function releaseButterflies() {
-
-    if (reducedMotion.matches) {
-      return;
-    }
-
-
-    const amount =
-      window.innerWidth < 700
-        ? 14
-        : 22;
-
-
-    for (
-      let i = 0;
-      i < amount;
-      i++
-    ) {
+    for (let i = 0; i < butterflyCount; i++) {
 
       const butterfly =
-        createButterfly();
+        document.createElement("span");
 
+      butterfly.className = "butterfly";
 
-      const angle =
-        (i / amount) *
-        Math.PI *
-        2;
+      /*
+       * Start position is around the center/card area.
+       * Slight randomness makes every butterfly feel natural.
+       */
 
+      const startX =
+        42 + Math.random() * 16;
 
-      const distance =
-        Math.max(
-          window.innerWidth,
-          window.innerHeight
-        ) *
-        (
-          0.55 +
-          Math.random() * 0.45
-        );
+      const startY =
+        43 + Math.random() * 15;
 
+      butterfly.style.left = `${startX}%`;
+      butterfly.style.top = `${startY}%`;
 
-      const horizontal =
-        Math.cos(angle) *
-        distance *
-        (0.65 + Math.random() * 0.55);
+      /*
+       * Random flight direction
+       */
 
+      const directionX =
+        (Math.random() - 0.5) * 2;
 
-      const vertical =
-        Math.sin(angle) *
-        distance *
-        (0.65 + Math.random() * 0.45) -
-        90;
+      const directionY =
+        (Math.random() - 0.5) * 2;
 
+      const distanceX =
+        directionX * (180 + Math.random() * 260);
+
+      const distanceY =
+        directionY * (180 + Math.random() * 280);
+
+      const scale =
+        0.65 + Math.random() * 1.15;
+
+      const rotation =
+        -45 + Math.random() * 90;
+
+      const duration =
+        1.8 + Math.random() * 1.8;
 
       butterfly.style.setProperty(
         "--x",
-        `${horizontal}px`
+        `${distanceX}px`
       );
-
 
       butterfly.style.setProperty(
         "--y",
-        `${vertical}px`
+        `${distanceY}px`
       );
-
-
-      butterfly.style.setProperty(
-        "--r",
-        `${Math.random() * 240 - 120}deg`
-      );
-
 
       butterfly.style.setProperty(
         "--scale",
-        `${0.75 + Math.random() * 1.25}`
+        scale
       );
 
+      butterfly.style.setProperty(
+        "--rot",
+        `${rotation}deg`
+      );
+
+      butterfly.style.setProperty(
+        "--duration",
+        `${duration}s`
+      );
+
+      /*
+       * Different animation delays make the butterflies
+       * leave naturally rather than all at exactly once.
+       */
 
       butterfly.style.animationDelay =
-        `${Math.random() * 0.65}s`;
+        `${Math.random() * 0.25}s`;
 
+      butterflyLayer.appendChild(butterfly);
 
-      const size =
-        52 +
-        Math.random() * 50;
+      /*
+       * Trigger animation on next frame.
+       */
 
-
-      butterfly.style.width =
-        `${size}px`;
-
-
-      butterfly.style.height =
-        `${size}px`;
-
-
-      document.body.appendChild(
-        butterfly
-      );
-
-
-      butterfly.addEventListener(
-        "animationend",
-        event => {
-
-          if (
-            event.animationName ===
-            "fly-away"
-          ) {
-
-            butterfly.remove();
-
-          }
-
-        }
-      );
-
+      requestAnimationFrame(() => {
+        butterfly.classList.add("fly");
+      });
     }
-
   }
 
 
-  /* =========================================================
-     RELEASE PETALS
-  ========================================================= */
+  /* =======================================================
+     START MUSIC
+     ======================================================= */
 
-  function releasePetals() {
+  function startMusic() {
 
-    if (reducedMotion.matches) {
+    if (!music) {
       return;
     }
 
+    try {
 
-    const amount =
-      window.innerWidth < 700
-        ? 18
-        : 32;
+      music.volume = 0.65;
 
+      const playPromise =
+        music.play();
 
-    for (
-      let i = 0;
-      i < amount;
-      i++
-    ) {
+      if (playPromise !== undefined) {
 
-      const petal =
-        document.createElement("span");
+        playPromise.catch(() => {
 
+          /*
+           * Some browsers can still block playback.
+           * This is normal and doesn't break the invitation.
+           */
 
-      petal.className =
-        "falling-petal";
+          console.info(
+            "Wedding music could not start automatically."
+          );
 
+        });
+      }
 
-      petal.style.left =
-        `${Math.random() * 100}%`;
+    } catch (error) {
 
-
-      petal.style.setProperty(
-        "--duration",
-        `${3 + Math.random() * 3}s`
-      );
-
-
-      petal.style.setProperty(
-        "--drift",
-        `${Math.random() * 260 - 130}px`
-      );
-
-
-      petal.style.setProperty(
-        "--rotation",
-        `${Math.random() * 720 - 360}deg`
-      );
-
-
-      petal.style.animationDelay =
-        `${Math.random() * 0.8}s`;
-
-
-      const size =
-        8 +
-        Math.random() * 10;
-
-
-      petal.style.width =
-        `${size}px`;
-
-
-      petal.style.height =
-        `${size * 1.5}px`;
-
-
-      document.body.appendChild(
-        petal
-      );
-
-
-      petal.addEventListener(
-        "animationend",
-        () => petal.remove()
+      console.info(
+        "Wedding music could not start.",
+        error
       );
 
     }
+  }
+
+
+  /* =======================================================
+     OPEN INVITATION
+     ======================================================= */
+
+  function openInvitation() {
+
+    /*
+     * Prevent double activation.
+     */
+
+    if (invitationOpened) {
+      return;
+    }
+
+    invitationOpened = true;
+
+
+    /*
+     * Disable button immediately.
+     */
+
+    if (openButton) {
+      openButton.disabled = true;
+    }
+
+
+    /*
+     * Make sure the page is at the top.
+     */
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto"
+    });
+
+
+    /*
+     * 1. Start butterflies.
+     */
+
+    createOpeningButterflies();
+
+
+    /*
+     * 2. Start music from the user interaction.
+     */
+
+    startMusic();
+
+
+    /*
+     * 3. Slight pause before the opening starts
+     *    disappearing. This gives the butterflies a moment
+     *    to appear.
+     */
+
+    setTimeout(() => {
+
+      opening.classList.add("is-closing");
+
+    }, 120);
+
+
+    /*
+     * 4. Reveal the main wedding website.
+     */
+
+    setTimeout(() => {
+
+      invitation.classList.add("is-visible");
+
+      /*
+       * Unlock page scrolling.
+       */
+
+      body.classList.remove(
+        "invitation-locked"
+      );
+
+      body.classList.add(
+        "invitation-opened"
+      );
+
+
+      /*
+       * Make absolutely sure the website starts
+       * at the Hero / top.
+       */
+
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto"
+      });
+
+    }, 650);
+
+
+    /*
+     * 5. Completely remove the opening from interaction
+     *    after its fade animation has finished.
+     */
+
+    setTimeout(() => {
+
+      opening.classList.add("is-hidden");
+
+    }, 1350);
 
   }
 
 
-  /* =========================================================
-     OPEN INVITATION
-  ========================================================= */
+  /* =======================================================
+     OPEN BY WAX SEAL
+     ======================================================= */
 
-  openButton.addEventListener(
-    "click",
-    () => {
+  if (openButton) {
 
-      if (opening) {
-        return;
+    openButton.addEventListener(
+      "click",
+      (event) => {
+
+        event.stopPropagation();
+
+        openInvitation();
+
       }
+    );
+
+  }
 
 
-      opening = true;
+  /* =======================================================
+     OPEN BY TOUCHING / CLICKING ANYWHERE ON CARD
+     ======================================================= */
 
+  if (openingCard) {
 
-      openButton.disabled =
-        true;
+    openingCard.addEventListener(
+      "click",
+      (event) => {
 
+        /*
+         * If wax seal was clicked, its own listener
+         * already handles the action.
+         */
 
-      /*
-        Butterflies and petals are released
-        exactly when the invitation is opened.
-      */
+        if (
+          event.target.closest("#openButton")
+        ) {
+          return;
+        }
 
-      releaseButterflies();
+        openInvitation();
 
-      releasePetals();
-
-
-      musicButton.hidden =
-        !AudioContextClass;
-
-
-      void startMusic();
-
-
-      /*
-        Give the butterflies a brief moment
-        before fading away the entrance.
-      */
-
-      setTimeout(
-        () => {
-
-          entrance.classList.add(
-            "opened"
-          );
-
-        },
-        180
-      );
-
-
-      website.inert = false;
-
-
-      document.body.classList.remove(
-        "sealed"
-      );
-
-
-      document
-        .getElementById("home")
-        .focus({
-          preventScroll: true
-        });
-
-
-      setTimeout(
-        () => {
-
-          entrance.remove();
-
-        },
-        reducedMotion.matches
-          ? 0
-          : 1500
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     MUSIC TOGGLE
-  ========================================================= */
-
-  musicButton.addEventListener(
-    "click",
-    () => {
-
-      if (musicOn) {
-        stopMusic();
       }
+    );
 
-      else {
-        void startMusic();
+
+    /*
+     * Accessibility
+     */
+
+    openingCard.setAttribute(
+      "role",
+      "button"
+    );
+
+    openingCard.setAttribute(
+      "tabindex",
+      "0"
+    );
+
+    openingCard.setAttribute(
+      "aria-label",
+      "Touch to open wedding invitation"
+    );
+
+
+    /*
+     * Keyboard accessibility
+     */
+
+    openingCard.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Enter" ||
+          event.key === " "
+        ) {
+
+          event.preventDefault();
+
+          openInvitation();
+
+        }
+
       }
+    );
 
-    }
-  );
+  }
 
 
-  /* =========================================================
+  /* =======================================================
      COUNTDOWN
-  ========================================================= */
+     ======================================================= */
 
-  /*
-    Wedding ceremony:
-    January 2, 2027
-    11:00 AM
-    India Standard Time
-  */
-
-  const weddingTime =
+  const weddingDate =
     new Date(
-      "2027-01-02T11:00:00+05:30"
-    ).getTime();
-
-
-  const countdownParts = [
-    "days",
-    "hours",
-    "minutes",
-    "seconds"
-  ].map(
-    id =>
-      document.getElementById(id)
-  );
+      "2027-04-18T16:30:00+05:00"
+    );
 
 
   function updateCountdown() {
 
-    const remaining =
-      Math.max(
-        0,
-        weddingTime - Date.now()
-      );
+    const now =
+      new Date();
+
+    const difference =
+      weddingDate.getTime() -
+      now.getTime();
+
+
+    const daysElement =
+      document.getElementById("days");
+
+    const hoursElement =
+      document.getElementById("hours");
+
+    const minutesElement =
+      document.getElementById("minutes");
+
+    const secondsElement =
+      document.getElementById("seconds");
+
+
+    if (
+      !daysElement ||
+      !hoursElement ||
+      !minutesElement ||
+      !secondsElement
+    ) {
+      return;
+    }
+
+
+    if (difference <= 0) {
+
+      daysElement.textContent = "000";
+      hoursElement.textContent = "00";
+      minutesElement.textContent = "00";
+      secondsElement.textContent = "00";
+
+      return;
+    }
 
 
     const totalSeconds =
       Math.floor(
-        remaining / 1000
+        difference / 1000
       );
 
 
-    const values = [
-
+    const days =
       Math.floor(
         totalSeconds / 86400
-      ),
+      );
 
+    const hours =
       Math.floor(
-        totalSeconds / 3600
-      ) % 24,
+        (totalSeconds % 86400) / 3600
+      );
 
+    const minutes =
       Math.floor(
-        totalSeconds / 60
-      ) % 60,
+        (totalSeconds % 3600) / 60
+      );
 
-      totalSeconds % 60
-
-    ];
-
-
-    values.forEach(
-      (value, index) => {
-
-        countdownParts[index]
-          .textContent =
-          String(value)
-            .padStart(2, "0");
-
-      }
-    );
+    const seconds =
+      totalSeconds % 60;
 
 
-    if (!remaining) {
+    daysElement.textContent =
+      String(days).padStart(3, "0");
 
-      document
-        .getElementById(
-          "countdown-title"
-        )
-        .textContent =
-        "Our forever has begun";
+    hoursElement.textContent =
+      String(hours).padStart(2, "0");
 
-    }
+    minutesElement.textContent =
+      String(minutes).padStart(2, "0");
+
+    secondsElement.textContent =
+      String(seconds).padStart(2, "0");
 
   }
 
 
   updateCountdown();
-
 
   setInterval(
     updateCountdown,
@@ -767,89 +504,198 @@
   );
 
 
-  /* =========================================================
-     SCROLL REVEALS
-  ========================================================= */
+  /* =======================================================
+     GALLERY LIGHTBOX
+     ======================================================= */
 
-  if (
-    "IntersectionObserver" in window &&
-    !reducedMotion.matches
-  ) {
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(
-            entry => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                entry.target
-                  .classList
-                  .remove(
-                    "pending"
-                  );
+  const galleryCards =
+    document.querySelectorAll(
+      ".gallery-card[data-lightbox]"
+    );
 
 
-                observer.unobserve(
-                  entry.target
-                );
+  function openLightbox(imageSrc) {
 
-              }
+    if (
+      !lightbox ||
+      !lightboxImage
+    ) {
+      return;
+    }
 
-            }
-          );
+    lightboxImage.src =
+      imageSrc;
 
-        },
-        {
-          threshold: 0.1
-        }
-      );
+    lightbox.classList.add(
+      "is-open"
+    );
 
+    lightbox.setAttribute(
+      "aria-hidden",
+      "false"
+    );
 
-    document
-      .querySelectorAll(
-        ".reveal"
-      )
-      .forEach(
-        section => {
-
-          section.classList.add(
-            "pending"
-          );
-
-
-          observer.observe(
-            section
-          );
-
-        }
-      );
+    body.classList.add(
+      "lightbox-open"
+    );
 
   }
 
 
-  /* =========================================================
-     STOP MUSIC WHEN TAB IS HIDDEN
-  ========================================================= */
+  function closeLightbox() {
 
-  document.addEventListener(
-    "visibilitychange",
-    () => {
+    if (!lightbox) {
+      return;
+    }
+
+    lightbox.classList.remove(
+      "is-open"
+    );
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    body.classList.remove(
+      "lightbox-open"
+    );
+
+    /*
+     * Clear image after transition.
+     */
+
+    setTimeout(() => {
 
       if (
-        document.hidden &&
-        musicOn
+        !lightbox.classList.contains(
+          "is-open"
+        )
       ) {
 
-        stopMusic();
+        lightboxImage.src = "";
+
+      }
+
+    }, 300);
+
+  }
+
+
+  galleryCards.forEach(
+    (card) => {
+
+      card.addEventListener(
+        "click",
+        () => {
+
+          const imageSrc =
+            card.dataset.lightbox;
+
+          if (imageSrc) {
+            openLightbox(
+              imageSrc
+            );
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  if (lightboxClose) {
+
+    lightboxClose.addEventListener(
+      "click",
+      closeLightbox
+    );
+
+  }
+
+
+  /*
+   * Clicking outside image closes lightbox.
+   */
+
+  if (lightbox) {
+
+    lightbox.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target === lightbox
+        ) {
+          closeLightbox();
+        }
+
+      }
+    );
+
+  }
+
+
+  /*
+   * ESC closes lightbox.
+   */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape" &&
+        lightbox &&
+        lightbox.classList.contains(
+          "is-open"
+        )
+      ) {
+
+        closeLightbox();
 
       }
 
     }
   );
 
-})();
+
+  /* =======================================================
+     INITIAL STATE
+     ======================================================= */
+
+  /*
+   * Keep opening visible.
+   */
+
+  if (opening) {
+    opening.classList.remove(
+      "is-closing",
+      "is-hidden"
+    );
+  }
+
+
+  /*
+   * Keep invitation hidden until opening.
+   */
+
+  if (invitation) {
+    invitation.classList.remove(
+      "is-visible"
+    );
+  }
+
+
+  /*
+   * Ensure the page starts at top.
+   */
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "auto"
+  });
+
+});
