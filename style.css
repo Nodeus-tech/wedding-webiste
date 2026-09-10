@@ -3417,3 +3417,403 @@ img.scroll-animate.is-visible {
     object-position: center;
   }
 }
+
+
+
+/* =========================================================
+   WEDDING VIDEO
+   ========================================================= */
+
+.wedding-video-section {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #180707;
+}
+
+.wedding-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: min(78vh, 820px);
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.wedding-video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Cinematic overlay */
+.wedding-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(15, 4, 4, 0.12) 0%,
+      rgba(15, 4, 4, 0.04) 35%,
+      rgba(15, 4, 4, 0.18) 65%,
+      rgba(15, 4, 4, 0.58) 100%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.wedding-video-content {
+  position: absolute;
+  z-index: 2;
+
+  left: 50%;
+  bottom: 10%;
+
+  width: min(90%, 800px);
+
+  transform: translateX(-50%);
+
+  text-align: center;
+
+  color: #fff;
+
+  pointer-events: none;
+
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.45),
+    0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Francis & Natalina */
+
+.wedding-video-content h2 {
+  margin: 0;
+
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 400;
+  line-height: 1;
+
+  color: #fff;
+
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+
+/* F and N — Allura */
+.wedding-video-content h2 .initial-f,
+.wedding-video-content h2 .initial-n {
+  font-family: "Allura", cursive;
+  font-weight: 400;
+  font-style: normal;
+
+  display: inline-block;
+}
+
+
+/* Ampersand */
+.wedding-video-content h2 .ampersand {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.55em;
+  font-weight: 500;
+  font-style: italic;
+
+  margin: 0 0.12em;
+
+  color: #e6cc8b;
+}
+
+
+/* ARE GETTING MARRIED */
+
+.video-subtitle {
+  margin: 18px 0 0;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+
+  font-weight: 600;
+
+  letter-spacing: 0.32em;
+
+  color: #fff;
+}
+
+
+/* Divider */
+
+.video-divider {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  width: min(240px, 60%);
+
+  margin: 22px auto 18px;
+}
+
+.video-divider span {
+  flex: 1;
+
+  height: 1px;
+
+  background: rgba(230, 204, 139, 0.8);
+}
+
+.video-divider i {
+  font-family: "Cormorant Garamond", serif;
+
+  font-size: 1rem;
+
+  font-style: normal;
+
+  color: #e6cc8b;
+}
+
+
+/* Date */
+
+.video-date {
+  margin: 0;
+
+  font-family: "Montserrat", sans-serif;
+
+  font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+
+  font-weight: 500;
+
+  letter-spacing: 0.22em;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .wedding-video-wrapper {
+    height: 68vh;
+    min-height: 460px;
+  }
+
+  .wedding-video-content {
+    bottom: 9%;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .wedding-video-wrapper {
+    height: 72svh;
+    min-height: 480px;
+  }
+
+  .wedding-video {
+    object-position: center center;
+  }
+
+  .wedding-video-content {
+    bottom: 8%;
+    width: 92%;
+  }
+
+  .wedding-video-content h2 {
+    font-size: clamp(3rem, 13vw, 4.5rem);
+    line-height: 0.95;
+  }
+
+  .video-subtitle {
+    margin-top: 16px;
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.22em;
+  }
+
+  .video-divider {
+    width: 180px;
+    gap: 10px;
+    margin: 17px auto 14px;
+  }
+
+  .video-date {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+  .wedding-video-wrapper {
+    min-height: 450px;
+  }
+
+  .wedding-video-content h2 {
+    font-size: 2.8rem;
+  }
+
+  .video-subtitle {
+    font-size: 0.52rem;
+  }
+
+  .video-date {
+    font-size: 0.52rem;
+  }
+
+}
+
+
+
+.footer h2 .initial-f,
+.footer h2 .initial-n {
+  font-family: "Allura", cursive;
+  font-weight: 400;
+  font-style: normal;
+  display: inline-block;
+}
+
+
+
+
+
+/* =========================================================
+   TIMELINE — TIME & LOCATION
+   ========================================================= */
+
+.timeline-time {
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
+}
+
+.timeline-content h3 {
+  margin: 6px 0 5px;
+  color: var(--red-dark);
+  font-family: var(--serif);
+  font-size: 29px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.timeline-place {
+  display: inline-block;
+  margin-top: 9px;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+}
+
+
+/* =========================================================
+   VENUE / MAP — TIME & LOCATION
+   ========================================================= */
+
+.map-copy {
+  padding: 23px 21px 24px;
+}
+
+.map-copy > span {
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+}
+
+.map-copy h3 {
+  margin: 7px 0 8px;
+  color: var(--red-dark);
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.map-copy p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   TIME & LOCATION — MOBILE
+   ========================================================= */
+
+@media (max-width: 440px) {
+
+  .timeline-time {
+    font-size: 9px;
+    letter-spacing: 0.13em;
+  }
+
+  .timeline-place {
+    font-size: 8.5px;
+    letter-spacing: 0.07em;
+    line-height: 1.45;
+  }
+
+  .map-copy > span {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .map-copy p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+}
+
