@@ -695,4 +695,177 @@ document.addEventListener("DOMContentLoaded", () => {
     behavior: "auto"
   });
 
+  /* =========================================================
+   WEDDING MUSIC PLAYER
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const music = document.getElementById("weddingMusic");
+  const musicPlayer = document.getElementById("musicPlayer");
+  const musicToggle = document.getElementById("musicToggle");
+  const openButton = document.getElementById("openButton");
+
+  if (!music || !musicPlayer || !musicToggle) {
+    return;
+  }
+
+
+  /* -------------------------------------------------------
+     SHOW MUSIC PLAYER
+     ------------------------------------------------------- */
+
+  function showMusicPlayer() {
+    musicPlayer.classList.add("music-visible");
+  }
+
+
+  /* -------------------------------------------------------
+     UPDATE PLAYER UI
+     ------------------------------------------------------- */
+
+  function updateMusicUI() {
+
+    if (music.paused) {
+
+      musicPlayer.classList.add("is-paused");
+
+      musicToggle.setAttribute(
+        "aria-label",
+        "Play wedding music"
+      );
+
+      musicToggle.setAttribute(
+        "aria-pressed",
+        "false"
+      );
+
+    } else {
+
+      musicPlayer.classList.remove("is-paused");
+
+      musicToggle.setAttribute(
+        "aria-label",
+        "Pause wedding music"
+      );
+
+      musicToggle.setAttribute(
+        "aria-pressed",
+        "true"
+      );
+
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     PLAY MUSIC
+     ------------------------------------------------------- */
+
+  async function playWeddingMusic() {
+
+    try {
+
+      await music.play();
+
+      updateMusicUI();
+
+    } catch (error) {
+
+      console.log(
+        "Wedding music could not start automatically:",
+        error
+      );
+
+      updateMusicUI();
+
+    }
+  }
+
+
+  /* -------------------------------------------------------
+     OPEN INVITATION
+     ------------------------------------------------------- */
+
+  if (openButton) {
+
+    openButton.addEventListener("click", () => {
+
+      /*
+       * Start music immediately after the user's
+       * interaction. This is important because browsers
+       * allow audio playback after a user gesture.
+       */
+
+      playWeddingMusic();
+
+      /*
+       * Reveal the music button slightly after
+       * the opening animation begins.
+       */
+
+      setTimeout(() => {
+        showMusicPlayer();
+      }, 900);
+
+    });
+
+  }
+
+
+  /* -------------------------------------------------------
+     MUSIC BUTTON
+     ------------------------------------------------------- */
+
+  musicToggle.addEventListener("click", async () => {
+
+    if (music.paused) {
+
+      await playWeddingMusic();
+
+    } else {
+
+      music.pause();
+
+      updateMusicUI();
+
+    }
+
+  });
+
+
+  /* -------------------------------------------------------
+     AUDIO EVENTS
+     ------------------------------------------------------- */
+
+  music.addEventListener("play", () => {
+    updateMusicUI();
+  });
+
+
+  music.addEventListener("pause", () => {
+    updateMusicUI();
+  });
+
+
+  music.addEventListener("ended", () => {
+
+    /*
+     * The audio is looped, but keep the UI
+     * synchronized just in case.
+     */
+
+    updateMusicUI();
+
+  });
+
+
+  /* -------------------------------------------------------
+     INITIAL STATE
+     ------------------------------------------------------- */
+
+  updateMusicUI();
+
+});
+
 });
