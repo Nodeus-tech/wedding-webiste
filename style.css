@@ -555,7 +555,6 @@ body.invitation-open .invitation {
   transform: translateX(-50%);
 
   z-index: 0;
-
   pointer-events: none;
 
   overflow: hidden;
@@ -576,9 +575,9 @@ body.invitation-open .invitation {
   object-fit: fill;
 
   opacity: 0.7;
+
   pointer-events: none;
 }
-
 
 /* =========================================================
    HERO
@@ -679,7 +678,7 @@ body.invitation-open .invitation {
   margin:
     16px auto 12px;
 
-  color: var(--red-dark);
+  color: #5d0710;
 
   font-family: var(--script);
 
@@ -3063,152 +3062,104 @@ img.scroll-animate.is-visible {
 
 
 
-/* ================================
-   FULL-SCREEN HERO VIDEO
-   ================================ */
+
+/* =========================================
+   WEDDING VIDEO — FIRST FULL SCREEN
+   ========================================= */
 
 .wedding-video-section {
   position: relative;
+
   width: 100%;
-  height: 100dvh;
-  min-height: 100dvh;
+  height: 100svh;
+  min-height: 100svh;
+
   margin: 0;
   padding: 0;
+
   overflow: hidden;
 }
 
+
+/* =========================================
+   VIDEO WRAPPER
+   ========================================= */
+
 .wedding-video-wrapper {
   position: relative;
+
   width: 100%;
   height: 100%;
+
   margin: 0;
   padding: 0;
+
   overflow: hidden;
 }
+
+
+/* =========================================
+   VIDEO
+   ========================================= */
 
 .wedding-video {
   position: absolute;
   inset: 0;
+
   width: 100%;
   height: 100%;
+
   display: block;
+
   margin: 0;
   padding: 0;
 
-  /* Shows the complete video while filling the screen */
   object-fit: cover;
   object-position: center center;
 }
 
-/* Dark overlay */
+
+/* =========================================
+   VIDEO OVERLAY
+   ========================================= */
+
 .wedding-video-overlay {
   position: absolute;
   inset: 0;
+
   z-index: 2;
+
   background: rgba(0, 0, 0, 0.15);
+
   pointer-events: none;
 }
 
-/* Text over video */
+
+/* =========================================
+   VIDEO CONTENT
+   TOP POSITION
+   ========================================= */
+
 .wedding-video-content {
   position: absolute;
-  inset: 0;
+
   z-index: 3;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  box-sizing: border-box;
-
-  text-align: center;
-  pointer-events: none;
-}
-
-
-/* ================================
-   MOBILE
-   ================================ */
-
-@media (max-width: 440px) {
-
-  .wedding-video-section {
-    width: 100vw;
-    height: 100dvh;
-    min-height: 100dvh;
-  }
-
-  .wedding-video-wrapper {
-    width: 100%;
-    height: 100%;
-  }
-
-  .wedding-video {
-    width: 100%;
-    height: 100%;
-
-    /*
-      Full screen on mobile.
-      The video scales according to the
-      phone's actual screen dimensions.
-    */
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-
-/* ================================
-   DESKTOP / 440px MASTER CANVAS
-   ================================ */
-
-@media (min-width: 441px) {
-
-  .wedding-video-section {
-    width: 440px;
-    height: 956px;
-    min-height: 956px;
-
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .wedding-video-wrapper {
-    width: 440px;
-    height: 956px;
-  }
-
-  .wedding-video {
-    width: 440px;
-    height: 956px;
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
-
-/* =========================================================
-   TEXT
-   ========================================================= */
-
-.wedding-video-content {
-  position: absolute;
-  z-index: 2;
-
   left: 50%;
-  bottom: 10%;
+  top: 5%;
 
   width: min(90%, 800px);
 
+  margin: 0;
+  padding: 0;
+
   transform: translateX(-50%);
+
+  box-sizing: border-box;
 
   text-align: center;
 
-  color: #fff;
+  color: #5d0710;
 
   pointer-events: none;
 
@@ -3218,51 +3169,74 @@ img.scroll-animate.is-visible {
 }
 
 
-/* Francis & Natalina */
+/* =========================================
+   FRANCIS & NATALINA
+   ========================================= */
 
 .wedding-video-content h2 {
   margin: 0;
+  padding: 0;
 
   font-family: "Great Vibes", cursive;
-  font-size: clamp(4rem, 8vw, 7rem);
+
+  font-size: clamp(1.5rem, 3vw, 4rem);
+
   font-weight: 400;
+
   line-height: 1;
 
-  color: #fff;
+  color: #5d0710;
 
   text-shadow:
     0 2px 20px rgba(0, 0, 0, 0.4);
 }
 
 
-/* F and N — Allura */
+/* =========================================
+   F AND N — ALLURA
+   ========================================= */
+
 .wedding-video-content h2 .initial-f,
 .wedding-video-content h2 .initial-n {
+
   font-family: "Allura", cursive;
+
   font-weight: 400;
+
   font-style: normal;
 
   display: inline-block;
 }
 
 
-/* Ampersand */
+/* =========================================
+   AMPERSAND
+   ========================================= */
+
 .wedding-video-content h2 .ampersand {
+
   font-family: "Cormorant Garamond", serif;
+
   font-size: 0.55em;
+
   font-weight: 500;
+
   font-style: italic;
 
   margin: 0 0.12em;
 
-  color: #e6cc8b;
+  color: #5d0710;
 }
 
 
-/* ARE GETTING MARRIED */
+/* =========================================
+   ARE GETTING MARRIED
+   ========================================= */
 
 .video-subtitle {
+
   margin: 18px 0 0;
+  padding: 0;
 
   font-family: "Montserrat", sans-serif;
 
@@ -3272,13 +3246,18 @@ img.scroll-animate.is-visible {
 
   letter-spacing: 0.32em;
 
-  color: #fff;
+  line-height: 1.4;
+
+  color: #5d0710;
 }
 
 
-/* Divider */
+/* =========================================
+   DIVIDER
+   ========================================= */
 
 .video-divider {
+
   display: flex;
 
   align-items: center;
@@ -3289,9 +3268,13 @@ img.scroll-animate.is-visible {
   width: min(240px, 60%);
 
   margin: 22px auto 18px;
+
+  padding: 0;
 }
 
+
 .video-divider span {
+
   flex: 1;
 
   height: 1px;
@@ -3299,21 +3282,29 @@ img.scroll-animate.is-visible {
   background: rgba(230, 204, 139, 0.8);
 }
 
+
 .video-divider i {
+
   font-family: "Cormorant Garamond", serif;
 
   font-size: 1rem;
 
   font-style: normal;
 
+  line-height: 1;
+
   color: #e6cc8b;
 }
 
 
-/* Date */
+/* =========================================
+   DATE
+   ========================================= */
 
 .video-date {
+
   margin: 0;
+  padding: 0;
 
   font-family: "Montserrat", sans-serif;
 
@@ -3323,95 +3314,256 @@ img.scroll-animate.is-visible {
 
   letter-spacing: 0.22em;
 
-  color: #fff;
+  line-height: 1.4;
+
+  color: #ffffff;
 }
 
 
-/* =========================================================
-   TABLET
-   ========================================================= */
+/* =========================================
+   DESKTOP / TABLET
+   440 × 956 MASTER CANVAS
+   ========================================= */
 
-@media (max-width: 900px) {
+@media (min-width: 441px) {
+
+  .wedding-video-section {
+
+    width: var(--design-width);
+
+    height: var(--design-height);
+
+    min-height: var(--design-height);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 
   .wedding-video-wrapper {
-    height: 68vh;
-    min-height: 460px;
+
+    width: var(--design-width);
+
+    height: var(--design-height);
   }
 
-  .wedding-video-content {
-    bottom: 9%;
-  }
-
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-  .wedding-video-wrapper {
-    height: 72svh;
-    min-height: 480px;
-  }
 
   .wedding-video {
+
+    width: var(--design-width);
+
+    height: var(--design-height);
+
+    object-fit: cover;
+
     object-position: center center;
   }
 
+
   .wedding-video-content {
-    bottom: 8%;
+
+    top: 6%;
+
+    width: min(90%, 800px);
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 900px) and (min-width: 601px) {
+
+  .wedding-video-content {
+
+    top: 6%;
+
     width: 92%;
   }
 
-  .wedding-video-content h2 {
-    font-size: clamp(3rem, 13vw, 4.5rem);
-    line-height: 0.95;
+}
+
+
+/* =========================================
+   MOBILE
+   FIRST SECTION = EXACTLY ONE SCREEN
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .wedding-video-section {
+
+    width: 100vw;
+
+    height: 100svh;
+
+    min-height: 100svh;
+
+    margin: 0;
+    padding: 0;
   }
 
+
+  .wedding-video-wrapper {
+
+    width: 100%;
+
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .wedding-video {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center center;
+
+    display: block;
+  }
+
+
+  /* ==============================
+     TEXT — TOP
+     ============================== */
+
+  .wedding-video-content {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 5%;
+
+    bottom: auto;
+
+    width: 92%;
+
+    margin: 0;
+
+    padding: 0;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+  }
+
+
+  /* ==============================
+     NAMES
+     ============================== */
+
+  .wedding-video-content h2 {
+
+    font-size: clamp(3rem, 13vw, 4.5rem);
+
+    line-height: 0.95;
+
+    margin: 0;
+  }
+
+
+  /* ==============================
+     SUBTITLE
+     ============================== */
+
   .video-subtitle {
+
     margin-top: 16px;
 
     font-size: 0.58rem;
 
     letter-spacing: 0.22em;
+
+    line-height: 1.4;
   }
 
+
+  /* ==============================
+     DIVIDER
+     ============================== */
+
   .video-divider {
+
     width: 180px;
+
     gap: 10px;
+
     margin: 17px auto 14px;
   }
 
+
+  /* ==============================
+     DATE
+     ============================== */
+
   .video-date {
+
     font-size: 0.58rem;
+
     letter-spacing: 0.14em;
+
+    line-height: 1.4;
   }
 
 }
 
 
-/* =========================================================
+/* =========================================
    VERY SMALL PHONES
-   ========================================================= */
+   ========================================= */
 
 @media (max-width: 380px) {
 
-  .wedding-video-wrapper {
-    min-height: 450px;
+  .wedding-video-content {
+
+    top: 4%;
   }
+
 
   .wedding-video-content h2 {
+
     font-size: 2.8rem;
+
+    line-height: 0.95;
   }
+
 
   .video-subtitle {
+
     font-size: 0.52rem;
+
+    letter-spacing: 0.18em;
   }
 
+
+  .video-divider {
+
+    width: 160px;
+
+    margin-top: 15px;
+
+    margin-bottom: 12px;
+  }
+
+
   .video-date {
+
     font-size: 0.52rem;
+
+    letter-spacing: 0.12em;
   }
 
 }
@@ -3861,3 +4013,208 @@ body:not(.invitation-locked) .music-player {
   visibility: visible !important;
   color: rgb(0, 0, 0) !important;
 }
+
+
+
+
+/* =========================================================
+   WEDDING VIDEO — FULL FIRST SCREEN
+   Source video: 720 × 1280
+   ========================================================= */
+
+.wedding-video-section {
+  position: relative;
+
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+
+.wedding-video-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+
+.wedding-video {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  margin: 0;
+  padding: 0;
+
+  /*
+     IMPORTANT:
+     Cover the entire available screen.
+     The video keeps its original aspect ratio.
+     Edges may be cropped depending on screen ratio.
+  */
+  object-fit: cover;
+  object-position: center center;
+}
+
+
+/* =========================================================
+   MOBILE — FULL DEVICE VIEWPORT
+   ========================================================= */
+
+@media (max-width: 440px) {
+
+  .wedding-video-section {
+    width: 100vw;
+
+    height: 100dvh;
+    min-height: 100dvh;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+  }
+
+  .wedding-video-wrapper {
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
+
+    margin: 0;
+    padding: 0;
+  }
+
+  .wedding-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP / TABLET
+   Keep your 440 × 956 master design
+   ========================================================= */
+
+@media (min-width: 441px) {
+
+  .wedding-video-section {
+    width: var(--design-width);
+    height: var(--design-height);
+    min-height: var(--design-height);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wedding-video-wrapper {
+    width: var(--design-width);
+    height: var(--design-height);
+
+    min-height: 0;
+  }
+
+  .wedding-video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+
+/* =========================================================
+   IMPORTANT — REMOVE OLD MOBILE HEIGHT OVERRIDES
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .wedding-video-wrapper {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .wedding-video-wrapper {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .wedding-video-wrapper {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+}
+
+
+
+/* =========================================================
+   MOBILE / SMALL SCREENS
+   Resize border animation to screen
+   ========================================================= */
+
+@media (max-width: 440px) {
+
+  .site-border-background {
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    transform: none;
+
+    overflow: hidden;
+  }
+
+  .border-background-video {
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
