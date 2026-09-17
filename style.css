@@ -302,9 +302,8 @@ body.invitation-locked .site-shell {
   position: absolute;
 
   left: 50%;
-  bottom: 21%;
-
-  transform: translateX(-50%);
+  top: 65%;
+  transform: translate(-50%, -50%);
 
   z-index: 5;
 
@@ -323,7 +322,7 @@ body.invitation-locked .site-shell {
 
   cursor: pointer;
 
-  padding: 12px 24px;
+  padding: 24px 24px;
 
   white-space: nowrap;
 
@@ -335,7 +334,6 @@ body.invitation-locked .site-shell {
     opacity 0.35s ease,
     transform 0.35s ease;
 }
-
 
 /*
  * Small elegant underline
