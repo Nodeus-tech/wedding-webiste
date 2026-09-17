@@ -869,3 +869,378 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 });
+
+
+
+
+
+/* =========================================================
+   VIDEO OPENING SCREEN
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const opening = document.getElementById("opening");
+  const openingVideo = document.getElementById("openingVideo");
+  const openingTapButton = document.getElementById("openingTapButton");
+
+  const weddingMusic = document.getElementById("weddingMusic");
+
+  if (!opening || !openingVideo) {
+    return;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * OPEN INVITATION
+   * -------------------------------------------------------
+   */
+
+  const openInvitation = async () => {
+
+    /*
+     * Prevent multiple taps.
+     */
+
+    if (opening.classList.contains("is-playing")) {
+      return;
+    }
+
+    opening.classList.add("is-playing");
+
+
+    /*
+     * Make absolutely sure the video starts
+     * from the beginning.
+     */
+
+    try {
+      openingVideo.currentTime = 0;
+    } catch (error) {
+      console.warn("Unable to reset opening video:", error);
+    }
+
+
+    /*
+     * Start video.
+     */
+
+    try {
+
+      await openingVideo.play();
+
+    } catch (error) {
+
+      console.warn("Opening video could not play:", error);
+
+      /*
+       * If playback fails, allow the user
+       * to try again.
+       */
+
+      opening.classList.remove("is-playing");
+
+      return;
+    }
+
+
+    /*
+     * Start wedding music after the user's
+     * interaction.
+     *
+     * This avoids browser autoplay restrictions.
+     */
+
+    if (weddingMusic) {
+
+      weddingMusic.volume = 0.5;
+
+      weddingMusic.play().catch(() => {
+        console.log("Wedding music playback was blocked.");
+      });
+
+    }
+
+  };
+
+
+  /*
+   * -------------------------------------------------------
+   * TAP / CLICK
+   * -------------------------------------------------------
+   */
+
+  opening.addEventListener("click", openInvitation);
+
+  opening.addEventListener("touchend", (event) => {
+
+    /*
+     * Prevent duplicate click/touch triggering.
+     */
+
+    event.preventDefault();
+
+    openInvitation();
+
+  }, {
+    passive: false
+  });
+
+
+  /*
+   * -------------------------------------------------------
+   * VIDEO FINISHED
+   * -------------------------------------------------------
+   */
+
+  openingVideo.addEventListener("ended", () => {
+
+    /*
+     * Begin fade-out.
+     */
+
+    opening.classList.add("is-closing");
+
+
+    /*
+     * Unlock the main invitation.
+     */
+
+    document.body.classList.remove("invitation-locked");
+
+    document.body.classList.add("invitation-open");
+
+
+    /*
+     * Allow scrolling.
+     */
+
+    document.body.style.overflow = "";
+
+
+    /*
+     * Remove the opening from interaction
+     * after the fade animation.
+     */
+
+    setTimeout(() => {
+
+      opening.style.display = "none";
+
+    }, 850);
+
+  });
+
+});
+
+
+
+/* =========================================================
+   WEDDING MUSIC CONTROLLER
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const music = document.getElementById("weddingMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  const musicPlayer = document.getElementById("musicPlayer");
+
+  if (!music || !musicToggle) {
+    return;
+  }
+
+
+  /*
+   * -------------------------------------------------------
+   * STATE
+   * -------------------------------------------------------
+   */
+
+  let userMuted = false;
+  let wasPlayingBeforeHidden = false;
+
+
+  /*
+   * -------------------------------------------------------
+   * UPDATE MUSIC BUTTON UI
+   * -------------------------------------------------------
+   */
+
+  const updateMusicUI = () => {
+
+    const isMuted = music.muted;
+
+    musicToggle.setAttribute(
+      "aria-pressed",
+      String(!isMuted)
+    );
+
+    musicToggle.setAttribute(
+      "aria-label",
+      isMuted ? "Unmute music" : "Mute music"
+    );
+
+
+    /*
+     * Optional classes for CSS styling.
+     */
+
+    if (isMuted) {
+
+      musicToggle.classList.add("is-muted");
+
+      if (musicPlayer) {
+        musicPlayer.classList.add("is-muted");
+      }
+
+    } else {
+
+      musicToggle.classList.remove("is-muted");
+
+      if (musicPlayer) {
+        musicPlayer.classList.remove("is-muted");
+      }
+
+    }
+
+  };
+
+
+  /*
+   * -------------------------------------------------------
+   * MUTE / UNMUTE
+   * -------------------------------------------------------
+   */
+
+  musicToggle.addEventListener("click", (event) => {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+
+    /*
+     * Toggle only the muted state.
+     */
+
+    music.muted = !music.muted;
+
+    userMuted = music.muted;
+
+
+    /*
+     * If unmuting, make sure playback is running.
+     */
+
+    if (!music.muted && music.paused) {
+
+      music.play().catch(() => {
+        console.warn("Music playback could not be resumed.");
+      });
+
+    }
+
+
+    updateMusicUI();
+
+  });
+
+
+  /*
+   * -------------------------------------------------------
+   * PAGE VISIBILITY
+   *
+   * When the visitor switches to another app,
+   * minimizes the browser, changes tab, etc.,
+   * pause the music.
+   * -------------------------------------------------------
+   */
+
+  document.addEventListener("visibilitychange", () => {
+
+    if (document.hidden) {
+
+      /*
+       * Remember whether music was actually playing.
+       */
+
+      wasPlayingBeforeHidden =
+        !music.paused && !music.ended;
+
+
+      /*
+       * Explicitly stop playback.
+       */
+
+      music.pause();
+
+    } else {
+
+      /*
+       * Visitor returned to the website.
+       *
+       * Resume only if:
+       * - music was playing before they left
+       * - they haven't manually muted it
+       */
+
+      if (
+        wasPlayingBeforeHidden &&
+        !userMuted
+      ) {
+
+        music.play().catch(() => {
+          console.warn("Music could not resume after returning.");
+        });
+
+      }
+
+    }
+
+  });
+
+
+  /*
+   * -------------------------------------------------------
+   * PAGEHIDE
+   *
+   * Handles navigation away / closing the page.
+   * -------------------------------------------------------
+   */
+
+  window.addEventListener("pagehide", () => {
+
+    music.pause();
+
+    wasPlayingBeforeHidden = false;
+
+  });
+
+
+  /*
+   * -------------------------------------------------------
+   * BEFORE UNLOAD
+   * -------------------------------------------------------
+   */
+
+  window.addEventListener("beforeunload", () => {
+
+    music.pause();
+
+  });
+
+
+  /*
+   * -------------------------------------------------------
+   * INITIAL STATE
+   * -------------------------------------------------------
+   *
+   * The music should initially be unmuted after the
+   * visitor opens the invitation through the video.
+   */
+
+  music.muted = false;
+
+  updateMusicUI();
+
+});

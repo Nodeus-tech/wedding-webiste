@@ -43,96 +43,92 @@
   <main class="site-shell" id="siteShell">
 
     <!-- =====================================================
-         OPENING SCREEN
+         VIDEO OPENING SCREEN
          ===================================================== -->
     <section
       class="opening"
       id="opening"
-      aria-label="Wedding invitation opening"
+      aria-label="Open wedding invitation"
     >
 
-      <div class="opening-bg-orb orb-one"></div>
-      <div class="opening-bg-orb orb-two"></div>
+      <div class="opening-video-wrapper">
 
-      <div
-        class="opening-card"
-        id="openingCard"
-      >
+        <video
+          class="opening-video"
+          id="openingVideo"
+          playsinline
+          preload="auto"
+          poster=""
+        >
+          <source
+            src="assets/envelope-opening-animation.mp4"
+            type="video/mp4"
+          />
 
-        <!-- Top bouquet -->
-        <img
-          class="bouquet bouquet-top"
-          src="assets/bouquet-top.png"
-          alt=""
-          aria-hidden="true"
-        />
+          Your browser does not support the video element.
+        </video>
 
-        <!-- Bottom bouquet -->
-        <img
-          class="bouquet bouquet-bottom"
-          src="assets/bouquet-bottom.png"
-          alt=""
-          aria-hidden="true"
-        />
+        <!-- Dark/light overlay for readability -->
+        <div class="opening-video-overlay"></div>
 
-        <!-- Decorative card border -->
-        <div class="card-border"></div>
+        <!-- Tap instruction -->
+        <button
+          class="opening-tap-button"
+          id="openingTapButton"
+          type="button"
+          aria-label="Tap here to open wedding invitation"
+        >
+          <span>Tap here to open</span>
+        </button>
 
-        <!-- Opening content -->
-        <div class="opening-copy">
-
-          <p class="eyebrow">
-            A LITTLE INVITATION TO FOREVER
-          </p>
-
-          <div
-            class="initials"
-            aria-label="Francis and Natalina"
-          >
-            <span>F</span>
-            <i>&amp;</i>
-            <span>N</span>
-          </div>
-
-          <p class="opening-line">
-            Some moments are meant to be shared.
-          </p>
-
-          <!-- Wax seal -->
-          <button
-            class="wax-seal"
-            id="openButton"
-            type="button"
-            aria-label="Touch to open invitation"
-          >
-            <span class="seal-flower">❧</span>
-          </button>
-
-          <p class="touch-label">
-            TOUCH TO OPEN
-          </p>
-
-          <div class="gold-rule">
-            <span></span>
-            <b>♡</b>
-            <span></span>
-          </div>
-
-          <p class="music-note">
-            An invitation with music
-          </p>
-
-        </div>
       </div>
 
-      <!-- Butterflies created by JavaScript -->
-      <div
-        class="butterfly-layer"
-        id="butterflyLayer"
-        aria-hidden="true"
-      ></div>
-
     </section>
+
+
+    <!-- =====================================================
+         MAIN INVITATION
+         ===================================================== -->
+
+    <section
+      class="invitation"
+      id="invitation"
+    >
+
+      <!-- ===================================================
+           FIXED FRAME
+           =================================================== -->
+      <!-- <div
+        class="site-fixed-frame"
+        aria-hidden="true"
+      >
+        <img
+          src="assets/floral-frame.png"
+          alt=""
+        />
+      </div> -->
+
+
+      <!-- Floating butterflies -->
+      <div
+        class="floating-butterflies"
+        aria-hidden="true"
+      >
+        <span class="mini-butterfly mb-1">🦋</span>
+        <span class="mini-butterfly mb-2">🦋</span>
+        <span class="mini-butterfly mb-3">🦋</span>
+      </div>
+
+
+      <!-- ===================================================
+           ACTUAL INVITATION CONTENT
+           =================================================== -->
+
+      <div class="invitation-content">
+
+        <!-- KEEP EVERYTHING FROM YOUR CURRENT
+             wedding-video-section ONWARDS HERE -->
+
 
 
     <!-- =====================================================
@@ -143,10 +139,29 @@
       id="invitation"
     >
 
+    <!-- ===================================================
+     ANIMATED BORDER BACKGROUND
+     =================================================== -->
+    <div class="site-border-background" aria-hidden="true">
+      <video
+        class="border-background-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+      >
+        <source
+          src="assets/border-animation.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+
       <!-- ===================================================
            FIXED FRAME
            =================================================== -->
-      <div
+      <!-- <div
         class="site-fixed-frame"
         aria-hidden="true"
       >
@@ -154,7 +169,7 @@
           src="assets/floral-frame.png"
           alt=""
         />
-      </div>
+      </div> -->
 
 
       <!-- Floating butterflies -->
@@ -194,7 +209,7 @@
               preload="metadata"
             >
               <source
-                src="assets/wedding-video.mp4"
+                src="assets/hero-section-video.mp4"
                 type="video/mp4"
               />
 
@@ -774,52 +789,30 @@
       ======================================================= -->
 
   <div class="music-player" id="musicPlayer">
+
     <button
       class="music-toggle"
       id="musicToggle"
       type="button"
       aria-label="Mute music"
-      aria-pressed="true"
+      aria-pressed="false"
     >
-      <!-- Playing -->
-      <svg
-        class="music-icon music-icon-playing"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
-        <path d="M16 9a5 5 0 0 1 0 6"></path>
-        <path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path>
-      </svg>
+      <img
+        src="assets/speaker.png"
+        id="speakerIcon"
+        class="music-icon"
+        alt="Playing"
+      />
 
-      <!-- Paused / Muted -->
-      <svg
-        class="music-icon music-icon-paused"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path>
-        <path d="M18 9l-6 6"></path>
-        <path d="M12 9l6 6"></path>
-      </svg>
+      <img
+        src="assets/mute.png"
+        id="muteIcon"
+        class="music-icon"
+        alt="Muted"
+      />
     </button>
-  </div>
+
+</div>
 
 
   <!-- =======================================================
