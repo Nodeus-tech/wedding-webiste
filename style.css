@@ -1073,7 +1073,7 @@ body.invitation-open .invitation {
 
   font-family: var(--sans);
 
-  font-size: 6px;
+  font-size: 8px;
 
   font-weight: 600;
 
@@ -1481,17 +1481,11 @@ body.invitation-open .invitation {
 }
 
 .map-copy > span {
-  color:
-    var(--gold);
-
-  font-family:
-    var(--sans);
-
-  font-size: 7px;
-
-  font-weight: 600;
-
-  letter-spacing: .17em;
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
 }
 
 .map-copy h3 {
@@ -3589,7 +3583,7 @@ img.scroll-animate.is-visible {
 .timeline-time {
   color: var(--gold);
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.16em;
   line-height: 1.4;
@@ -3665,7 +3659,7 @@ img.scroll-animate.is-visible {
 @media (max-width: 440px) {
 
   .timeline-time {
-    font-size: 9px;
+    font-size: 10px;
     letter-spacing: 0.13em;
   }
 
@@ -4203,6 +4197,7 @@ body:not(.invitation-locked) .music-player {
 
     object-fit: fill;
   }
+  
 }
 
 
@@ -4210,7 +4205,11 @@ body:not(.invitation-locked) .music-player {
 
 
 
-
+.map-copy > span {
+  font-size: 12px !important;
+  color: var(--gold) !important;
+  font-weight: 700 !important;
+}
 
 
 
