@@ -117,7 +117,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100svh;
+  min-height: 100vh;
 
   color: var(--ink);
   font-family: var(--serif);
@@ -165,7 +165,7 @@ button {
       100vw
     );
 
-  min-height: 100svh;
+  min-height: 100vh;
 
   margin: 0 auto;
 
@@ -213,7 +213,7 @@ body.invitation-locked .site-shell {
   z-index: 99999;
 
   width: 100vw;
-  height: 100svh;
+  height: 100dvh;
 
   display: flex;
   align-items: center;
@@ -241,8 +241,8 @@ body.invitation-locked .site-shell {
 .opening-video-wrapper {
   position: relative;
 
-  width: min(100vw, calc(100svh * 440 / 956));
-  height: min(100svh, calc(100vw * 956 / 440));
+  width: min(100vw, calc(100dvh * 440 / 956));
+  height: min(100dvh, calc(100vw * 956 / 440));
 
   max-width: 440px;
   max-height: 956px;
@@ -476,7 +476,7 @@ body.invitation-open .invitation {
 
   .opening-video-wrapper {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 
     max-width: none;
     max-height: none;
@@ -496,7 +496,7 @@ body.invitation-open .invitation {
 
   width: 100%;
 
-  min-height: 100svh;
+  min-height: 100vh;
 
   overflow: visible;
 
@@ -2229,7 +2229,7 @@ body.lightbox-open {
 @media (min-width: 441px) {
 
   .site-shell {
-    min-height: 100svh;
+    min-height: 100vh;
   }
 
   .hero {
@@ -2320,7 +2320,8 @@ and (min-width: 441px) {
 .reveal {
   opacity: 0;
 
-  transform: translate3d(0, 45px, 0);
+  transform:
+    translateY(45px);
 
   transition:
     opacity .9s cubic-bezier(.22,.61,.36,1),
@@ -2339,7 +2340,8 @@ and (min-width: 441px) {
 .reveal-left {
   opacity: 0;
 
-  transform: translate3d(-55px, 0, 0);
+  transform:
+    translateX(-55px);
 
   transition:
     opacity .9s cubic-bezier(.22,.61,.36,1),
@@ -2358,7 +2360,8 @@ and (min-width: 441px) {
 .reveal-right {
   opacity: 0;
 
-  transform: translate3d(55px, 0, 0);
+  transform:
+    translateX(55px);
 
   transition:
     opacity .9s cubic-bezier(.22,.61,.36,1),
@@ -4056,8 +4059,8 @@ body:not(.invitation-locked) .music-player {
   position: relative;
 
   width: 100%;
-  height: 100svh;
-  min-height: 100svh;
+  height: 100dvh;
+  min-height: 100dvh;
 
   margin: 0;
   padding: 0;
@@ -4110,8 +4113,8 @@ body:not(.invitation-locked) .music-player {
   .wedding-video-section {
     width: 100vw;
 
-    height: 100svh;
-    min-height: 100svh;
+    height: 100dvh;
+    min-height: 100dvh;
 
     margin: 0;
     padding: 0;
@@ -4183,24 +4186,24 @@ body:not(.invitation-locked) .music-player {
 @media (max-width: 900px) {
 
   .wedding-video-wrapper {
-    height: 100svh;
-    min-height: 100svh;
+    height: 100dvh;
+    min-height: 100dvh;
   }
 }
 
 @media (max-width: 600px) {
 
   .wedding-video-wrapper {
-    height: 100svh;
-    min-height: 100svh;
+    height: 100dvh;
+    min-height: 100dvh;
   }
 }
 
 @media (max-width: 380px) {
 
   .wedding-video-wrapper {
-    height: 100svh;
-    min-height: 100svh;
+    height: 100dvh;
+    min-height: 100dvh;
   }
 }
 
@@ -4218,7 +4221,7 @@ body:not(.invitation-locked) .music-player {
     left: 0;
 
     width: 100vw;
-    height: 100svh;
+    height: 100dvh;
 
     transform: none;
 

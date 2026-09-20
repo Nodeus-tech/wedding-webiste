@@ -1244,3 +1244,60 @@ document.addEventListener("DOMContentLoaded", () => {
   updateMusicUI();
 
 });
+
+
+/* =========================================================
+   SCROLL DETAILS INDICATOR
+   Shows only after opening video is completely finished
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const openingVideo =
+    document.getElementById("openingVideo");
+
+  const scrollDetailsOverlay =
+    document.getElementById("scrollDetailsOverlay");
+
+  const invitation =
+    document.getElementById("invitation");
+
+  if (!openingVideo || !scrollDetailsOverlay) {
+    return;
+  }
+
+
+  function showScrollDetails() {
+
+    scrollDetailsOverlay.classList.add("show");
+
+  }
+
+
+  openingVideo.addEventListener("ended", () => {
+
+    /*
+     * Opening animation has completely finished.
+     * Show the invitation.
+     */
+
+    if (invitation) {
+      invitation.classList.add("is-visible");
+    }
+
+
+    /*
+     * Small delay makes sure the invitation
+     * has started appearing before the
+     * scroll indicator comes in.
+     */
+
+    setTimeout(() => {
+
+      showScrollDetails();
+
+    }, 0);
+
+  });
+
+});

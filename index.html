@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
@@ -12,10 +12,9 @@
 
   <title>Francis &amp; Natalina — Wedding Invitation</title>
 
-
   <!-- =====================================================
-     SOCIAL / WHATSAPP LINK PREVIEW
-     ===================================================== -->
+       SOCIAL / WHATSAPP LINK PREVIEW
+       ===================================================== -->
 
   <meta
     property="og:title"
@@ -39,7 +38,7 @@
 
   <meta
     property="og:image:type"
-    content="image/jpg"
+    content="image/jpeg"
   />
 
   <meta
@@ -67,6 +66,7 @@
     content="https://wedding-webiste-fawn.vercel.app/"
   />
 
+  <!-- Twitter / X -->
   <meta
     name="twitter:card"
     content="summary_large_image"
@@ -87,39 +87,38 @@
     content="https://wedding-webiste-fawn.vercel.app/assets/preview.jpg"
   />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- =====================================================
+       GOOGLE FONTS
+       ===================================================== -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  />
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-  href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
-  rel="stylesheet"
-/>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
 
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="invitation-locked">
 
+  <!-- =====================================================
+       MAIN SITE SHELL
+       ===================================================== -->
+
   <main class="site-shell" id="siteShell">
 
-    <!-- =====================================================
+    <!-- ===================================================
          VIDEO OPENING SCREEN
-         ===================================================== -->
+         =================================================== -->
+
     <section
       class="opening"
       id="opening"
@@ -133,7 +132,6 @@
           id="openingVideo"
           playsinline
           preload="auto"
-          poster=""
         >
           <source
             src="assets/envelope-opening-animation.mp4"
@@ -143,87 +141,67 @@
           Your browser does not support the video element.
         </video>
 
-        <!-- Dark/light overlay for readability -->
+        <!-- Readability overlay -->
         <div class="opening-video-overlay"></div>
 
         <!-- Tap instruction -->
-        <button
-          class="opening-tap-button"
-          id="openingTapButton"
-          type="button"
-          aria-label="Tap here to open wedding invitation"
-        >
-          <span>Tap here to open</span>
-        </button>
+        <div class="opening-tap-wrap">
+          <button
+            class="opening-tap-button"
+            id="openingTapButton"
+            type="button"
+            aria-label="Tap here to open wedding invitation"
+          >
+            <span>Tap here to open</span>
+          </button>
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =====================================================
+    <!-- ===================================================
          MAIN INVITATION
-         ===================================================== -->
+         =================================================== -->
 
     <section
       class="invitation"
       id="invitation"
     >
 
+      <!-- =================================================
+           ANIMATED BORDER BACKGROUND
+           ================================================= -->
 
-      <!-- Floating butterflies -->
       <div
-        class="floating-butterflies"
+        class="site-border-background"
         aria-hidden="true"
       >
-        <span class="mini-butterfly mb-1">🦋</span>
-        <span class="mini-butterfly mb-2">🦋</span>
-        <span class="mini-butterfly mb-3">🦋</span>
+
+        <video
+          class="border-background-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source
+            src="assets/border-animation.mp4"
+            type="video/mp4"
+          />
+        </video>
+
       </div>
 
 
-      <!-- ===================================================
-           ACTUAL INVITATION CONTENT
-           =================================================== -->
-
-      <div class="invitation-content">
-
-        <!-- KEEP EVERYTHING FROM YOUR CURRENT
-             wedding-video-section ONWARDS HERE -->
-
-
-
-    <!-- =====================================================
-         MAIN INVITATION
-         ===================================================== -->
-    <section
-      class="invitation"
-      id="invitation"
-    >
-
-    <!-- ===================================================
-     ANIMATED BORDER BACKGROUND
-     =================================================== -->
-    <div class="site-border-background" aria-hidden="true">
-      <video
-        class="border-background-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="auto"
-      >
-        <source
-          src="assets/border-animation.mp4"
-          type="video/mp4"
-        />
-      </video>
-    </div>
-
-      <!-- ===================================================
+      <!-- =================================================
            FIXED FRAME
-           =================================================== -->
-      <!-- <div
+           ================================================= -->
+
+      <!--
+      <div
         class="site-fixed-frame"
         aria-hidden="true"
       >
@@ -231,29 +209,37 @@
           src="assets/floral-frame.png"
           alt=""
         />
-      </div> -->
+      </div>
+      -->
 
 
-      <!-- Floating butterflies -->
+      <!-- =================================================
+           FLOATING BUTTERFLIES
+           ================================================= -->
+
       <div
         class="floating-butterflies"
         aria-hidden="true"
       >
+
         <span class="mini-butterfly mb-1">🦋</span>
         <span class="mini-butterfly mb-2">🦋</span>
         <span class="mini-butterfly mb-3">🦋</span>
+
       </div>
 
 
-      <!-- ===================================================
-           ACTUAL INVITATION CONTENT
-           =================================================== -->
+      <!-- =================================================
+           INVITATION CONTENT
+           ================================================= -->
+
       <div class="invitation-content">
 
+
         <!-- =================================================
-            WEDDING VIDEO
-            ================================================= -->
-        
+             WEDDING VIDEO / HERO
+             ================================================= -->
+
         <section
           class="wedding-video-section"
           id="wedding-video"
@@ -280,7 +266,9 @@
 
             <div class="wedding-video-overlay"></div>
 
+
             <!-- Wedding text -->
+
             <div class="wedding-video-content">
 
               <h2>
@@ -311,35 +299,36 @@
 
 
         <!-- =================================================
-             INTRO
+             INTRO / PARENTS
              ================================================= -->
+
         <section class="section intro-section">
 
-          <p class="section-kicker">
-            WITH PARENTS OF
-          </p>
-
-          <h2>
-            Francis &amp; Natalina
-          </h2>
-
-          <p class="body-copy">
-            With hearts full of joy, together with our parents,
-            we joyfully invite you to witness and bless us in our
-            Holy Sacrament of Matrimony.
+          <p class="body-copy invitation-opening-copy">
+            With hearts full of joy,<br />
+            together with our beloved parents
           </p>
 
           <div class="parents-block">
 
             <p>
-              <strong>Mr. &amp; Mrs. Gaspar &amp; Lucy De Souza</strong>
+              <strong>
+                Mr. &amp; Mrs. Gaspar &amp; Lucy De Souza
+              </strong>
             </p>
 
             <p>
-              <strong>Mr. Gaspar De Souza &amp; Mrs. Mary Rodrigues</strong>
+              <strong>
+                Mr. Gaspar De Souza &amp; Mrs. Mary Rodrigues
+              </strong>
             </p>
 
           </div>
+
+          <p class="body-copy invitation-closing-copy">
+            We joyfully invite you to witness and bless us as we
+            celebrate our love and begin our journey together.
+          </p>
 
           <div class="flourish">
             ❦
@@ -351,13 +340,14 @@
         <!-- =================================================
              COUNTDOWN
              ================================================= -->
+
         <section
           class="section counter-section"
           id="counter"
         >
 
           <p class="section-kicker">
-            Until forever
+            UNTIL FOREVER
           </p>
 
           <h2>
@@ -397,6 +387,7 @@
         <!-- =================================================
              SCHEDULE
              ================================================= -->
+
         <section
           class="section"
           id="schedule"
@@ -413,6 +404,7 @@
           <div class="timeline">
 
             <!-- Wedding Ceremony -->
+
             <article class="timeline-item">
 
               <div class="timeline-icon">
@@ -421,7 +413,7 @@
 
               <div class="timeline-content">
 
-                <span class="timeline-time">
+                <span class="timeline-time timeline-time-large">
                   11:00 AM
                 </span>
 
@@ -444,6 +436,7 @@
 
 
             <!-- Reception -->
+
             <article class="timeline-item">
 
               <div class="timeline-icon">
@@ -452,7 +445,7 @@
 
               <div class="timeline-content">
 
-                <span class="timeline-time">
+                <span class="timeline-time timeline-time-large">
                   7:00 PM SHARP
                 </span>
 
@@ -481,6 +474,7 @@
         <!-- =================================================
              DIRECTIONS
              ================================================= -->
+
         <section
           class="section directions-section"
           id="directions"
@@ -496,6 +490,7 @@
 
 
           <!-- Ceremony -->
+
           <div class="map-card">
 
             <div class="map-art ceremony-map">
@@ -507,10 +502,6 @@
               <span class="map-road r1"></span>
               <span class="map-road r2"></span>
               <span class="map-road r3"></span>
-
-              <!-- <small>
-                CEREMONY
-              </small> -->
 
             </div>
 
@@ -543,6 +534,7 @@
 
 
           <!-- Reception -->
+
           <div class="map-card">
 
             <div class="map-art reception-map">
@@ -554,10 +546,6 @@
               <span class="map-road r1"></span>
               <span class="map-road r2"></span>
               <span class="map-road r3"></span>
-
-              <!-- <small>
-                RECEPTION
-              </small> -->
 
             </div>
 
@@ -594,6 +582,7 @@
         <!-- =================================================
              GALLERY
              ================================================= -->
+
         <section
           class="section gallery-section"
           id="gallery"
@@ -609,17 +598,24 @@
 
           <div class="gallery-grid">
 
+            <!-- Photo 1 -->
+
             <button
-              class="gallery-card tall"
-              data-lightbox="assets/img-01.jpg"
+              class="gallery-card tall gallery-photo-1"
+              data-lightbox="assets/img-01.png"
               aria-label="Open photo 1"
               type="button"
             >
+
               <img
-                src="assets/img-01.jpg"
+                src="assets/img-01.png"
                 alt="Wedding gallery photo 1"
               />
+
             </button>
+
+
+            <!-- Photo 2 -->
 
             <button
               class="gallery-card"
@@ -627,11 +623,16 @@
               aria-label="Open photo 2"
               type="button"
             >
+
               <img
                 src="assets/img-02.jpg"
                 alt="Wedding gallery photo 2"
               />
+
             </button>
+
+
+            <!-- Photo 3 -->
 
             <button
               class="gallery-card"
@@ -639,31 +640,32 @@
               aria-label="Open photo 3"
               type="button"
             >
+
               <img
                 src="assets/img-03.jpg"
                 alt="Wedding gallery photo 3"
               />
+
             </button>
+
+
+            <!-- Photo 4 -->
 
             <button
               class="gallery-card wide"
-              data-lightbox="assets/img-04.jpg"
+              data-lightbox="assets/img-04.png"
               aria-label="Open photo 4"
               type="button"
             >
+
               <img
-                src="assets/img-04.jpg"
+                src="assets/img-04.png"
                 alt="Wedding gallery photo 4"
               />
+
             </button>
 
           </div>
-
-          <!-- <p class="asset-hint">
-            Replace the gallery images in
-            <b>assets/</b>
-            with your own photos.
-          </p> -->
 
         </section>
 
@@ -671,6 +673,7 @@
         <!-- =================================================
              FAQ
              ================================================= -->
+
         <section
           class="section faq-section"
           id="faq"
@@ -689,12 +692,12 @@
             <details>
 
               <summary>
-                Why should we come on time?
+                What if I dance too much?
                 <span>+</span>
               </summary>
 
               <p>
-                Early birds get the fresh fruit, first dibs at the photo booth, and the most special moments from the start! ❤️
+                We’ll consider it a personal contribution to the wedding 😁
               </p>
 
             </details>
@@ -735,6 +738,7 @@
         <!-- =================================================
              FOOTER
              ================================================= -->
+
         <footer class="footer">
 
           <div class="footer-flower">
@@ -747,7 +751,7 @@
 
           <h2>
             <span class="initial-f">F</span>rancis
-            <span class="ampersand">&amp;</span><br>
+            <span class="ampersand">&amp;</span><br />
             <span class="initial-n">N</span>atalina
           </h2>
 
@@ -756,10 +760,6 @@
           </p>
 
           <div class="footer-line"></div>
-
-          <!-- <small>
-            2ND JANUARY 2027 · GOA
-          </small> -->
 
         </footer>
 
@@ -770,11 +770,12 @@
     <!-- END invitation -->
 
   </main>
+  <!-- END site-shell -->
 
 
-  <!-- =======================================================
-     WEDDING MUSIC
-     ======================================================= -->
+  <!-- =====================================================
+       WEDDING MUSIC
+       ===================================================== -->
 
   <audio
     id="weddingMusic"
@@ -788,11 +789,14 @@
   </audio>
 
 
-  <!-- =======================================================
-      FLOATING MUSIC PLAYER
-      ======================================================= -->
+  <!-- =====================================================
+       FLOATING MUSIC PLAYER
+       ===================================================== -->
 
-  <div class="music-player" id="musicPlayer">
+  <div
+    class="music-player"
+    id="musicPlayer"
+  >
 
     <button
       class="music-toggle"
@@ -801,6 +805,7 @@
       aria-label="Mute music"
       aria-pressed="false"
     >
+
       <img
         src="assets/speaker.png"
         id="speakerIcon"
@@ -814,14 +819,16 @@
         class="music-icon"
         alt="Muted"
       />
+
     </button>
 
-</div>
+  </div>
 
 
-  <!-- =======================================================
+  <!-- =====================================================
        LIGHTBOX
-       ======================================================= -->
+       ===================================================== -->
+
   <div
     class="lightbox"
     id="lightbox"
@@ -846,375 +853,376 @@
   </div>
 
 
+  <!-- =====================================================
+       MAIN JAVASCRIPT
+       ===================================================== -->
+
   <script src="script.js"></script>
 
 
+  <!-- =====================================================
+       UNIVERSAL SCROLL REVEAL
+       ===================================================== -->
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================================================
-    UNIVERSAL SCROLL REVEAL
-    Animates sections, text, images, cards and content
-    automatically as they enter the viewport.
-    ========================================================= */
+      /* ===================================================
+         1. SECTION ANIMATIONS
+         =================================================== */
 
-  document.addEventListener("DOMContentLoaded", () => {
-
-    /*
-    * -------------------------------------------------------
-    * 1. SECTION ANIMATIONS
-    * -------------------------------------------------------
-    */
-
-    const sections = document.querySelectorAll(
-      ".wedding-video-section, " +
-      ".hero, " +
-      ".intro-section, " +
-      ".counter-section, " +
-      "#schedule, " +
-      ".gallery-section, " +
-      ".directions-section, " +
-      ".faq-section, " +
-      ".footer"
-    );
-
-    sections.forEach(section => {
-      section.classList.add("scroll-section");
-    });
-
-
-
-    document
-    .querySelectorAll(".wedding-video-wrapper")
-    .forEach(element => {
-      element.classList.add("scroll-animate");
-    });
-
-
-    /*
-    * -------------------------------------------------------
-    * 2. TEXT ELEMENTS
-    * -------------------------------------------------------
-    */
-
-    const textElements = document.querySelectorAll(
-      ".section-kicker, " +
-      ".small-script, " +
-      ".hero-subtitle, " +
-      ".hero-date, " +
-      ".hero-place, " +
-      ".body-copy, " +
-      ".parents-block, " +
-      ".flourish, " +
-      ".timeline-time, " +
-      ".timeline-content h3, " +
-      ".timeline-content p, " +
-      ".timeline-place, " +
-      ".map-copy > span, " +
-      ".map-copy h3, " +
-      ".map-copy p, " +
-      ".faq-section h2, " +
-      ".footer p, " +
-      ".footer small"
-    );
-
-    textElements.forEach(element => {
-      element.classList.add("scroll-animate");
-    });
-
-
-    /*
-    * -------------------------------------------------------
-    * 3. HEADINGS
-    * -------------------------------------------------------
-    */
-
-    const headings = document.querySelectorAll(
-      ".hero h1, " +
-      ".intro-section h2, " +
-      ".counter-section h2, " +
-      "#schedule h2, " +
-      ".gallery-section h2, " +
-      ".directions-section h2, " +
-      ".faq-section h2, " +
-      ".footer h2"
-    );
-
-    headings.forEach(element => {
-      element.classList.add("scroll-animate");
-    });
-
-
-    /*
-    * -------------------------------------------------------
-    * 4. BUTTONS
-    * -------------------------------------------------------
-    */
-
-    const buttons = document.querySelectorAll(
-      ".gold-button, " +
-      ".map-button"
-    );
-
-    buttons.forEach(element => {
-      element.classList.add("scroll-animate", "zoom-in");
-    });
-
-
-    /*
-    * -------------------------------------------------------
-    * 5. DIVIDERS / DECORATIVE ELEMENTS
-    * -------------------------------------------------------
-    */
-
-    const decorativeElements = document.querySelectorAll(
-      ".hero-divider, " +
-      ".footer-line"
-    );
-
-    decorativeElements.forEach(element => {
-      element.classList.add("scroll-animate");
-    });
-
-
-    /*
-    * -------------------------------------------------------
-    * 6. COUNTDOWN
-    * -------------------------------------------------------
-    */
-
-    const countdown = document.querySelector(".countdown");
-
-    if (countdown) {
-      countdown.classList.add(
-        "scroll-animate",
-        "zoom-in",
-        "scroll-stagger"
+      const sections = document.querySelectorAll(
+        ".wedding-video-section, " +
+        ".hero, " +
+        ".intro-section, " +
+        ".counter-section, " +
+        "#schedule, " +
+        ".gallery-section, " +
+        ".directions-section, " +
+        ".faq-section, " +
+        ".footer"
       );
 
-      countdown.querySelectorAll(":scope > div").forEach(item => {
-        item.classList.add("scroll-animate");
-      });
-    }
-
-
-    /*
-    * -------------------------------------------------------
-    * 7. COUNTDOWN INDIVIDUAL NUMBERS
-    * -------------------------------------------------------
-    */
-
-    document
-      .querySelectorAll(".countdown strong")
-      .forEach(element => {
-        element.classList.add("scroll-animate", "zoom-in");
+      sections.forEach((section) => {
+        section.classList.add("scroll-section");
       });
 
 
-    /*
-    * -------------------------------------------------------
-    * 8. TIMELINE ITEMS
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         2. WEDDING VIDEO
+         =================================================== */
 
-    document
-      .querySelectorAll(".timeline-item")
-      .forEach((item, index) => {
+      document
+        .querySelectorAll(".wedding-video-wrapper")
+        .forEach((element) => {
+          element.classList.add("scroll-animate");
+        });
 
-        item.classList.add("scroll-animate");
 
-        /*
-        * Alternating directions
-        */
-        if (index % 2 === 0) {
-          item.classList.add("from-left");
-        } else {
-          item.classList.add("from-right");
-        }
+      /* ===================================================
+         3. TEXT ELEMENTS
+         =================================================== */
 
+      const textElements = document.querySelectorAll(
+        ".section-kicker, " +
+        ".small-script, " +
+        ".hero-subtitle, " +
+        ".hero-date, " +
+        ".hero-place, " +
+        ".body-copy, " +
+        ".parents-block, " +
+        ".flourish, " +
+        ".timeline-time, " +
+        ".timeline-content h3, " +
+        ".timeline-content p, " +
+        ".timeline-place, " +
+        ".map-copy > span, " +
+        ".map-copy h3, " +
+        ".map-copy p, " +
+        ".faq-section h2, " +
+        ".footer p, " +
+        ".footer small"
+      );
+
+      textElements.forEach((element) => {
+        element.classList.add("scroll-animate");
       });
 
 
-    /*
-    * -------------------------------------------------------
-    * 9. TIMELINE ICONS
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         4. HEADINGS
+         =================================================== */
 
-    document
-      .querySelectorAll(".timeline-icon")
-      .forEach(element => {
-        element.classList.add("scroll-animate", "zoom-in");
+      const headings = document.querySelectorAll(
+        ".hero h1, " +
+        ".intro-section h2, " +
+        ".counter-section h2, " +
+        "#schedule h2, " +
+        ".gallery-section h2, " +
+        ".directions-section h2, " +
+        ".faq-section h2, " +
+        ".footer h2"
+      );
+
+      headings.forEach((element) => {
+        element.classList.add("scroll-animate");
       });
 
 
-    /*
-    * -------------------------------------------------------
-    * 10. GALLERY
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         5. BUTTONS
+         =================================================== */
 
-    document
-      .querySelectorAll(".gallery-card")
-      .forEach((card, index) => {
+      const buttons = document.querySelectorAll(
+        ".gold-button, " +
+        ".map-button"
+      );
 
-        card.classList.add(
+      buttons.forEach((element) => {
+        element.classList.add(
           "scroll-animate",
+          "zoom-in"
+        );
+      });
+
+
+      /* ===================================================
+         6. DIVIDERS / DECORATIVE ELEMENTS
+         =================================================== */
+
+      const decorativeElements = document.querySelectorAll(
+        ".hero-divider, " +
+        ".footer-line"
+      );
+
+      decorativeElements.forEach((element) => {
+        element.classList.add("scroll-animate");
+      });
+
+
+      /* ===================================================
+         7. COUNTDOWN
+         =================================================== */
+
+      const countdown = document.querySelector(".countdown");
+
+      if (countdown) {
+
+        countdown.classList.add(
+          "scroll-animate",
+          "zoom-in",
           "scroll-stagger"
         );
 
-        /*
-        * Small stagger for each image
-        */
-        card.style.transitionDelay =
-          `${index * 0.12}s`;
-
-      });
-
-
-    /*
-    * -------------------------------------------------------
-    * 11. GALLERY IMAGES
-    * -------------------------------------------------------
-    */
-
-    document
-      .querySelectorAll(".gallery-card img")
-      .forEach(image => {
-        image.classList.add("scroll-animate");
-      });
+        countdown
+          .querySelectorAll(":scope > div")
+          .forEach((item) => {
+            item.classList.add("scroll-animate");
+          });
+      }
 
 
-    /*
-    * -------------------------------------------------------
-    * 12. MAP CARDS
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         8. COUNTDOWN NUMBERS
+         =================================================== */
 
-    document
-      .querySelectorAll(".map-card")
-      .forEach((card, index) => {
-
-        card.classList.add("scroll-animate");
-
-        card.style.transitionDelay =
-          `${index * 0.18}s`;
-
-      });
+      document
+        .querySelectorAll(".countdown strong")
+        .forEach((element) => {
+          element.classList.add(
+            "scroll-animate",
+            "zoom-in"
+          );
+        });
 
 
-    /*
-    * -------------------------------------------------------
-    * 13. MAP ART
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         9. TIMELINE ITEMS
+         =================================================== */
 
-    document
-      .querySelectorAll(".map-art")
-      .forEach(element => {
-        element.classList.add("scroll-animate", "zoom-in");
-      });
+      document
+        .querySelectorAll(".timeline-item")
+        .forEach((item, index) => {
 
+          item.classList.add("scroll-animate");
 
-    /*
-    * -------------------------------------------------------
-    * 14. MAP PINS
-    * -------------------------------------------------------
-    */
+          if (index % 2 === 0) {
+            item.classList.add("from-left");
+          } else {
+            item.classList.add("from-right");
+          }
 
-    document
-      .querySelectorAll(".map-pin")
-      .forEach(element => {
-        element.classList.add("scroll-animate", "zoom-in");
-      });
+        });
 
 
-    /*
-    * -------------------------------------------------------
-    * 15. FAQ
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         10. TIMELINE ICONS
+         =================================================== */
 
-    document
-      .querySelectorAll(".faq-list details")
-      .forEach((item, index) => {
-
-        item.classList.add("scroll-animate");
-
-        item.style.transitionDelay =
-          `${index * 0.12}s`;
-
-      });
+      document
+        .querySelectorAll(".timeline-icon")
+        .forEach((element) => {
+          element.classList.add(
+            "scroll-animate",
+            "zoom-in"
+          );
+        });
 
 
-    /*
-    * -------------------------------------------------------
-    * 16. FOOTER DECORATIONS
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         11. GALLERY CARDS
+         =================================================== */
 
-    document
-      .querySelectorAll(".footer-flower")
-      .forEach(element => {
-        element.classList.add("scroll-animate", "zoom-in");
-      });
+      document
+        .querySelectorAll(".gallery-card")
+        .forEach((card, index) => {
 
+          card.classList.add(
+            "scroll-animate",
+            "scroll-stagger"
+          );
 
-    /*
-    * -------------------------------------------------------
-    * 17. INTERSECTION OBSERVER
-    * -------------------------------------------------------
-    */
+          card.style.transitionDelay =
+            `${index * 0.12}s`;
 
-    const animatedElements =
-      document.querySelectorAll(".scroll-animate");
+        });
 
 
-    const observer =
-      new IntersectionObserver(
+      /* ===================================================
+         12. GALLERY IMAGES
+         =================================================== */
 
+      document
+        .querySelectorAll(".gallery-card img")
+        .forEach((image) => {
+          image.classList.add("scroll-animate");
+        });
+
+
+      /* ===================================================
+         13. MAP CARDS
+         =================================================== */
+
+      document
+        .querySelectorAll(".map-card")
+        .forEach((card, index) => {
+
+          card.classList.add("scroll-animate");
+
+          card.style.transitionDelay =
+            `${index * 0.18}s`;
+
+        });
+
+
+      /* ===================================================
+         14. MAP ART
+         =================================================== */
+
+      document
+        .querySelectorAll(".map-art")
+        .forEach((element) => {
+          element.classList.add(
+            "scroll-animate",
+            "zoom-in"
+          );
+        });
+
+
+      /* ===================================================
+         15. MAP PINS
+         =================================================== */
+
+      document
+        .querySelectorAll(".map-pin")
+        .forEach((element) => {
+          element.classList.add(
+            "scroll-animate",
+            "zoom-in"
+          );
+        });
+
+
+      /* ===================================================
+         16. FAQ
+         =================================================== */
+
+      document
+        .querySelectorAll(".faq-list details")
+        .forEach((item, index) => {
+
+          item.classList.add("scroll-animate");
+
+          item.style.transitionDelay =
+            `${index * 0.12}s`;
+
+        });
+
+
+      /* ===================================================
+         17. FOOTER DECORATIONS
+         =================================================== */
+
+      document
+        .querySelectorAll(".footer-flower")
+        .forEach((element) => {
+          element.classList.add(
+            "scroll-animate",
+            "zoom-in"
+          );
+        });
+
+
+      /* ===================================================
+         18. INTERSECTION OBSERVER
+         =================================================== */
+
+      const animatedElements =
+        document.querySelectorAll(".scroll-animate");
+
+      if (!animatedElements.length) {
+        return;
+      }
+
+      const observer = new IntersectionObserver(
         (entries) => {
 
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
 
             if (entry.isIntersecting) {
 
               entry.target.classList.add("is-visible");
 
-              /*
-              * Animate only once.
-              */
+              /* Animate only once */
               observer.unobserve(entry.target);
-
             }
 
           });
 
         },
-
         {
           threshold: 0.12,
           rootMargin: "0px 0px -60px 0px"
         }
-
       );
 
 
-    /*
-    * -------------------------------------------------------
-    * 18. START OBSERVING
-    * -------------------------------------------------------
-    */
+      /* ===================================================
+         19. START OBSERVING
+         =================================================== */
 
-    animatedElements.forEach(element => {
-      observer.observe(element);
+      animatedElements.forEach((element) => {
+        observer.observe(element);
+      });
+
     });
-
-
-  });
-
   </script>
+
+
+  <!-- =====================================================
+       FIXED SCROLL INDICATOR
+       ===================================================== -->
+
+  <div
+    class="scroll-details-overlay"
+    id="scrollDetailsOverlay"
+  >
+
+    <div class="scroll-details-content">
+
+      <span class="scroll-details-text">
+        SCROLL FOR MORE DETAILS
+      </span>
+
+      <div class="scroll-mouse">
+        <span class="scroll-wheel"></span>
+      </div>
+
+    </div>
+
+  </div>
 
 </body>
 </html>
+
 
