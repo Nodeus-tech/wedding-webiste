@@ -4645,7 +4645,7 @@ body:not(.invitation-locked) .music-player {
   width: min(440px, 100vw);
   height: min(
     calc(min(440px, 100vw) * 956 / 440),
-    100svh
+    100dvh
   );
 
   transform: translateX(-50%);
