@@ -159,6 +159,8 @@ button {
 .site-shell {
   position: relative;
 
+  z-index: 1;
+
   width:
     min(
       var(--design-width),
@@ -170,11 +172,7 @@ button {
   margin: 0 auto;
 
   background:
-    linear-gradient(
-      180deg,
-      #fffdf9,
-      #fffaf5
-    );
+    transparent
 
   box-shadow:
     0 0 0 1px rgba(255,255,255,.8),
