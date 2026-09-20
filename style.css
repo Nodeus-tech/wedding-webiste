@@ -117,7 +117,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100svh;
+  min-height: 100vh;
 
   color: var(--ink);
   font-family: var(--serif);
@@ -4630,23 +4630,17 @@ body:not(.invitation-locked) .music-player {
 
 /* =========================================================
    ANIMATED BORDER BACKGROUND
-   Fully responsive — locks to viewport, never shifts on scroll
+   FIXED TO VIEWPORT — DOES NOT SCROLL WITH CONTENT
    ========================================================= */
 
 .site-border-background {
   position: fixed;
 
-  /* Anchor top-left of the viewport */
   top: 0;
   left: 50%;
 
-  /* Responsive size — always fits the screen while
-     preserving the 440:956 master aspect ratio */
   width: min(440px, 100vw);
-  height: min(
-    calc(min(440px, 100vw) * 956 / 440),
-    100dvh
-  );
+  height: 100vh;
 
   transform: translateX(-50%);
 
@@ -4656,8 +4650,8 @@ body:not(.invitation-locked) .music-player {
   overflow: hidden;
   background: transparent;
 
-  /* Prevents micro-jitter / repaint shifts on scroll */
-  will-change: transform;
+  /* Prevent accidental interaction */
+  touch-action: none;
 }
 
 
@@ -4667,16 +4661,17 @@ body:not(.invitation-locked) .music-player {
 
 .border-background-video {
   position: absolute;
-  inset: 0;
+
+  top: 0;
+  left: 0;
 
   width: 100%;
   height: 100%;
 
   display: block;
 
-  /* The parent already matches the 440:956 ratio,
-     so 'fill' is exact — no crop, no letterbox. */
   object-fit: fill;
+  object-position: center center;
 
   opacity: 0.7;
 
@@ -4685,17 +4680,17 @@ body:not(.invitation-locked) .music-player {
 
 
 /* =========================================================
-   MOBILE / SMALL SCREENS (≤440px)
-   Full-bleed, locked to the viewport, no scroll shifting
+   MOBILE
    ========================================================= */
 
 @media (max-width: 440px) {
+
   .site-border-background {
     top: 0;
     left: 0;
 
     width: 100vw;
-    height: 100dvh;   /* stable unit — will NOT move on scroll */
+    height: 100vh;
 
     transform: none;
 
@@ -4703,10 +4698,10 @@ body:not(.invitation-locked) .music-player {
   }
 
   .border-background-video {
-    inset: 0;
     width: 100%;
     height: 100%;
 
     object-fit: fill;
+    object-position: center center;
   }
 }
