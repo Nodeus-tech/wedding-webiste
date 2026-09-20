@@ -4695,7 +4695,7 @@ body:not(.invitation-locked) .music-player {
     left: 0;
 
     width: 100vw;
-    height: 100svh;   /* stable unit — will NOT move on scroll */
+    height: 100dvh;   /* stable unit — will NOT move on scroll */
 
     transform: none;
 
