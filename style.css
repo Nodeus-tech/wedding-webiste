@@ -541,15 +541,33 @@ body.invitation-open .invitation {
    440 x 956 FIXED FRAME
    ========================================================= */
 
+/* =========================================================
+   ANIMATED BORDER BACKGROUND — FULLY RESPONSIVE
+   Aspect ratio locked to 440:956
+   ========================================================= */
+
 .site-border-background {
   position: fixed;
 
+  /* Anchor to top of viewport */
   top: 0;
   left: 50%;
 
-  width: 440px;
-  height: 956px;
+  /* ---- Responsive sizing ---- */
+  /*
+     width  = smaller of: 440px OR full viewport width
+     height = matching 440:956 ratio (width × 956 / 440)
 
+     This keeps the border video at the exact aspect ratio
+     of your master design on any screen size.
+  */
+  width: min(440px, 100vw);
+  height: min(
+    calc(min(440px, 100vw) * 956 / 440),
+    100svh                /* never taller than the visible viewport */
+  );
+
+  /* Center horizontally */
   transform: translateX(-50%);
 
   z-index: 0;
@@ -558,23 +576,69 @@ body.invitation-open .invitation {
   overflow: hidden;
 
   background: transparent;
+
+  /* Prevent scroll-jitter repaints */
+  will-change: transform;
 }
+
+
+/* =========================================================
+   BORDER BACKGROUND VIDEO
+   Fills the responsive parent exactly
+   ========================================================= */
 
 .border-background-video {
   position: absolute;
 
   inset: 0;
 
-  width: 440px;
-  height: 956px;
+  /* Fill the parent, not fixed pixels */
+  width: 100%;
+  height: 100%;
 
   display: block;
 
+  /* 'fill' stretches to match the 440:956 frame exactly.
+     'cover' would crop; 'contain' would letterbox.
+     'fill' is correct here because the frame itself is
+     already at the right aspect ratio. */
   object-fit: fill;
 
   opacity: 0.7;
 
   pointer-events: none;
+}
+
+
+/* =========================================================
+   MOBILE / SMALL SCREENS (≤440px)
+   Border background fills the entire viewport
+   ========================================================= */
+
+@media (max-width: 440px) {
+
+  .site-border-background {
+    top: 0;
+    left: 0;
+
+    /* Fill the mobile screen completely */
+    width: 100vw;
+    height: 100svh;   /* stable — will NOT change during scroll */
+
+    /* No centering offset needed on mobile */
+    transform: none;
+
+    overflow: hidden;
+  }
+
+  .border-background-video {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: fill;
+  }
+
 }
 
 
